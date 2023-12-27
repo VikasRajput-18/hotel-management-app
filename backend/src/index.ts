@@ -1,8 +1,10 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import "dotenv/config";
+import userRoutes from "./routes/users.routes";
+import authRoutes from "./routes/auth.routes";
 
-import mongoose, { ConnectOptions } from "mongoose";
+import mongoose from "mongoose";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -20,9 +22,8 @@ app.use(cors());
 
 const PORT = process.env.PORT || 8000;
 
-app.get("/api/test", async (req: Request, res: Response) => {
-  res.json({ message: "Hello World" });
-});
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is listing on http://localhost:${PORT}`);
