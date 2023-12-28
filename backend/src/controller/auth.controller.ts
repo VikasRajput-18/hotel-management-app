@@ -48,3 +48,14 @@ export const loginUser = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const validateToken = async (req: Request, res: Response) => {
+  try {
+    return res.status(200).json({ user: req.userId });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Something went wrong",
+    });
+  }
+};

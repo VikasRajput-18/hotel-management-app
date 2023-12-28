@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .error {
+    background: linear-gradient(180deg, #f46340 0%, #f93b13 100%);
+  }
+  .success {
+    background: linear-gradient(90deg, #3fb418 0%, #5de82e 100%);
+  }
+}

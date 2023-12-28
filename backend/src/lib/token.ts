@@ -5,3 +5,4 @@ export function generateToken(userId: string) {
     expiresIn: "1d",
   });
 }
+

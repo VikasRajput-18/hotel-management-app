@@ -4,6 +4,8 @@ import "dotenv/config";
 import userRoutes from "./routes/users.routes";
 import authRoutes from "./routes/auth.routes";
 
+import cookieParser from "cookie-parser";
+
 import mongoose from "mongoose";
 
 mongoose
@@ -16,9 +18,15 @@ mongoose
   });
 
 const app = express();
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL,
+    credentials: true,
+  })
+);
 
 const PORT = process.env.PORT || 8000;
 
