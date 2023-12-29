@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth.routes";
 import cookieParser from "cookie-parser";
 
 import mongoose from "mongoose";
+import path from "path";
 
 mongoose
   .connect(process.env.MONGODB_CONNECTION_STRING as string)
@@ -29,6 +30,8 @@ app.use(
 );
 
 const PORT = process.env.PORT || 8000;
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
