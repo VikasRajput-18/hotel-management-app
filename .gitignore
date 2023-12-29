@@ -6,3 +6,5 @@ node_modules
 ./env.local
 .env.e2e
 ./env.e2e
+.vscode
+dist
