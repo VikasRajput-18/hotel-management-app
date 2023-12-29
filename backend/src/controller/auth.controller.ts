@@ -3,6 +3,13 @@ import { User } from "../models/user.model";
 import bcrypt from "bcryptjs";
 import { validationResult } from "express-validator";
 import { generateToken } from "../lib/token";
+declare global {
+  namespace Express {
+    interface Request {
+      userId: string;
+    }
+  }
+}
 
 export const loginUser = async (req: Request, res: Response) => {
   const errors = validationResult(req);
@@ -58,4 +65,12 @@ export const validateToken = async (req: Request, res: Response) => {
       message: "Something went wrong",
     });
   }
+};
+
+export const logoutUser = (req: Request, res: Response) => {
+  res.cookie("auth_token", "", {
+    expires: new Date(0),
+  });
+
+  return res.send();
 };

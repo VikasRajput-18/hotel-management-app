@@ -4,31 +4,27 @@ import * as apiClient from "../api-client";
 import { useAppContext } from "../contexts/AppContext";
 import { Link, useNavigate } from "react-router-dom";
 
-export type RegisterFormData = {
+export type SignInFormData = {
   email: string;
-  firstName: string;
-  lastName: string;
   password: string;
-  confirmPassword: string;
 };
 
-const Register = () => {
+const SignIn = () => {
   const { showToast } = useAppContext();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const {
     register,
-    watch,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<RegisterFormData>();
+  } = useForm<SignInFormData>();
 
-  const mutation = useMutation(apiClient.register, {
+  const mutation = useMutation(apiClient.signIn, {
     async onSuccess() {
       await queryClient.invalidateQueries("validateToken");
-      showToast({ message: "registered successfully", type: "SUCCESS" });
+      showToast({ message: "Signed in Successful!", type: "SUCCESS" });
       reset();
       navigate("/");
     },
@@ -37,40 +33,13 @@ const Register = () => {
     },
   });
 
-  const onSubmit = (data: RegisterFormData) => {
+  const onSubmit = (data: SignInFormData) => {
     mutation.mutate(data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-      <h2 className="text-3xl font-bold">Create an Account</h2>
-      <div className="flex flex-col md:flex-row gap-5 ">
-        <label className="text-gray-700 text-sm font-bold flex-1">
-          First Name
-          <input
-            type="text"
-            {...register("firstName", {
-              required: "First Name is required",
-            })}
-            className="border rounded w-full py-2 px-2 font-normal"
-          />
-          {errors.firstName && (
-            <span className="text-red-500">{errors.firstName.message}</span>
-          )}
-        </label>
-        <label className="text-gray-700 text-sm font-bold flex-1">
-          Last Name
-          <input
-            type="text"
-            {...register("lastName", {
-              required: "Last Name is required",
-            })}
-            className="border rounded w-full py-2 px-2 font-normal"
-          />
-          {errors.lastName && (
-            <span className="text-red-500">{errors.lastName.message}</span>
-          )}
-        </label>
-      </div>
+      <h2 className="text-3xl font-bold">Sign In to your account</h2>
+
       <label className="text-gray-700 text-sm font-bold flex-1">
         Email
         <input
@@ -105,42 +74,23 @@ const Register = () => {
           <span className="text-red-500">{errors.password.message}</span>
         )}
       </label>
-      <label className="text-gray-700 text-sm font-bold flex-1">
-        Confirm Password
-        <input
-          type="password"
-          {...register("confirmPassword", {
-            validate: (val) => {
-              if (!val) {
-                return "Confirm Password is required";
-              } else if (watch("password") !== val) {
-                return "Password do not match";
-              }
-            },
-          })}
-          className="border rounded w-full py-2 px-2 font-normal"
-        />
-        {errors.confirmPassword && (
-          <span className="text-red-500">{errors.confirmPassword.message}</span>
-        )}
-      </label>
 
       <span className="flex items-center justify-between">
         <span className="text-sm">
-          Already have an account?
-          <Link className="text-blue-600  pl-2 hover:underline" to="/sign-in">
-            login
+          Don't have an account?
+          <Link className="text-blue-600  pl-2 hover:underline" to="/register">
+            Create an account here
           </Link>
         </span>
         <button
           type="submit"
           className="bg-blue-600 rounded-none text-white p-2 font-bold hover:bg-blue-500 text-xl"
         >
-          Create Account
+          Login
         </button>
       </span>
     </form>
   );
 };
 
-export default Register;
+export default SignIn;
