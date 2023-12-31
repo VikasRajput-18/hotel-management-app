@@ -29,9 +29,7 @@ export const loginUser = async (req: Request, res: Response) => {
       });
       return;
     }
-    console.log("email, password", email, password);
     let isPasswordMatch = await bcrypt.compare(password, user.password);
-    console.log("user", isPasswordMatch);
     if (!isPasswordMatch) {
       res.status(400).json({
         success: false,
