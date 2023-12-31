@@ -1,8 +1,6 @@
 import { useMutation } from "react-query";
 import { useAppContext } from "../contexts/AppContext";
-import ManageHotelForms, {
-  HotelFormData,
-} from "../forms/ManageHotelForms/ManageHotelForms";
+import ManageHotelForms from "../forms/ManageHotelForms/ManageHotelForms";
 import * as apiClient from "../api-client";
 
 const AddHotel = () => {

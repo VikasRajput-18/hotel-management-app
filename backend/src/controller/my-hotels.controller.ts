@@ -15,7 +15,6 @@ export const createMyHotels = async (req: Request, res: Response) => {
     });
 
     const imageUrls = await Promise.all(uploadPromises);
-    console.log("imageUrls", imageUrls);
     //if upload was successfull , add the urls to the new hotel
     newHotel.imageUrls = imageUrls;
     newHotel.lastUpdated = new Date();
