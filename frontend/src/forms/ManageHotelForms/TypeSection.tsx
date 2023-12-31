@@ -26,18 +26,10 @@ const TypeSection = () => {
             }
             `}
             >
-              {/* <input
-                type="radio"
-                className="hidden"
-                value={type}
-                {...register("type", {
-                  required: "Hotel type is required",
-                })}
-              /> */}
               <input
                 type="checkbox"
                 value={type}
-                className="hidden"
+                className="opacity-0"
                 {...register("type", {
                   validate: (type) => {
                     if (type && type.length > 0) {
