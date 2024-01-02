@@ -7,7 +7,7 @@ import { BiHotel, BiMoney, BiStar } from "react-icons/bi";
 
 const MyHotels = () => {
   const { showToast } = useAppContext();
-  const { data: hotelData } = useQuery("fetchMyHotels", apiClient.getMyHotel, {
+  const { data: hotelData } = useQuery("fetchMyHotels", apiClient.getMyHotels, {
     onError: () =>
       showToast({ message: "Error fetching Hotels", type: "ERROR" }),
   });
@@ -15,8 +15,6 @@ const MyHotels = () => {
   if (!hotelData) {
     return <span className="my-3 text-xl">No Hotels found</span>;
   }
-
-  console.log(hotelData);
 
   return (
     <section className="space-y-5">
@@ -64,7 +62,7 @@ const MyHotels = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold">Hotel Type :</h3>
               {hotel?.type?.map((type, ind) => {
                 return (
@@ -77,7 +75,7 @@ const MyHotels = () => {
                 );
               })}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold">Facilities :</h3>
               {hotel?.facilities?.map((facility, ind) => {
                 return (

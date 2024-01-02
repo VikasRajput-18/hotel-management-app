@@ -4,12 +4,48 @@ import { HotelFormData } from "./ManageHotelForms";
 const ImagesSection = () => {
   const {
     register,
+    watch,
+    setValue,
     formState: { errors },
   } = useFormContext<HotelFormData>();
+
+  const existingImageUrls = watch("imageUrls");
+
+  const handleDelete = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    imageUrl: string
+  ) => {
+    e.preventDefault();
+    const filteredImages = existingImageUrls?.filter((url) => url !== imageUrl);
+    setValue("imageUrls", filteredImages);
+  };
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-3">Images</h2>
       <div className="border rounded p-4 flex flex-col gap-4">
+        {existingImageUrls && (
+          <div className="flex flex-wrap gap-4">
+            {existingImageUrls.map((url) => {
+              return (
+                <div key={url} className="relative group w-44 h-44">
+                  <img
+                    src={url}
+                    className="min-h-full w-full h-full object-cover"
+                    alt="hotel image"
+                  />
+                  <button
+                    type="button"
+                    onClick={(e) => handleDelete(e, url)}
+                    className="absolute inset-0 bg-black bg-opacity-50 text-white opacity-0 group-hover:opacity-100"
+                  >
+                    Delete
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+        )}
         <input
           type="file"
           multiple
@@ -17,7 +53,8 @@ const ImagesSection = () => {
           className="w-full text-gray-700 font-normal"
           {...register("imageFiles", {
             validate: (imageFiles) => {
-              const totalLength = imageFiles.length;
+              const totalLength =
+                imageFiles.length + (existingImageUrls?.length || 0);
               if (totalLength === 0) {
                 return "At least one image should be added";
               }

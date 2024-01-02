@@ -29,7 +29,7 @@ const TypeSection = () => {
               <input
                 type="checkbox"
                 value={type}
-                className="opacity-0"
+                className="w-0 h-0"
                 {...register("type", {
                   validate: (type) => {
                     if (type && type.length > 0) {
