@@ -3,7 +3,8 @@ import cors from "cors";
 import "dotenv/config";
 import userRoutes from "./routes/users.routes";
 import authRoutes from "./routes/auth.routes";
-import hotelRoutes from "./routes/my-hotels.routes";
+import myHotelRoutes from "./routes/my-hotels.routes";
+import hotelRoutes from "./routes/hotels.routes";
 
 import cookieParser from "cookie-parser";
 
@@ -43,7 +44,8 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/my-hotels", hotelRoutes);
+app.use("/api/my-hotels", myHotelRoutes);
+app.use("/api/hotels", hotelRoutes);
 
 app.get("*", (req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
