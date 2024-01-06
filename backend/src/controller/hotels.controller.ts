@@ -2,6 +2,7 @@ import { Response, Request, query } from "express";
 import Hotel from "../models/hotel.model";
 import { HotelSearchResponse } from "../shared/types";
 import { constructSearchQuery } from "../lib/helper";
+import { validationResult } from "express-validator";
 
 export const searchHotels = async (req: Request, res: Response) => {
   try {
@@ -44,6 +45,25 @@ export const searchHotels = async (req: Request, res: Response) => {
     return res.status(200).json(response);
   } catch (error) {
     console.log(`Search :  ${error}`);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
+
+export const getHotelDetails = async (req: Request, res: Response) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.status(400).json({ errors: errors.array() });
+    }
+    const { id } = req.params;
+    const hotel = await Hotel.findById(id);
+    if (!hotel) {
+      return res.status(404).json({ message: "Hotel not found" });
+    }
+
+    return res.status(200).json(hotel);
+  } catch (error) {
+    console.log(`Hotel Details ID :  ${error}`);
     res.status(500).json({ message: "Something went wrong" });
   }
 };

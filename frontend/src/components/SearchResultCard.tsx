@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { HotelType } from "../../../backend/src/shared/types";
 import { AiFillStar } from "react-icons/ai";
 
-const HotelRating = ({ starRating }: { starRating: number }) => {
+export const HotelRating = ({ starRating }: { starRating: number }) => {
   let maxSize = 5;
 
   return (

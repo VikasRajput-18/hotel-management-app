@@ -49,7 +49,6 @@ const SearchBar = () => {
           Adults :
           <input
             type="number"
-            placeholder="Where are you going?"
             className="w-full focus:outline-none p-1 flex-1 font-bold"
             value={adultCount}
             min={1}
@@ -61,7 +60,6 @@ const SearchBar = () => {
           Children :
           <input
             type="number"
-            placeholder="Where are you going?"
             className="w-full focus:outline-none p-1 flex-1 font-bold"
             value={childCount}
             min={0}

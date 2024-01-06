@@ -18,7 +18,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test("should show hotel search results", async ({ page }) => {
-  await page.goto(`${UI_URL}`);
+  await page.goto(UI_URL);
   //   await page.locator("[name=destination]").fill("Test City");
   await page
     .getByRole("textbox", { name: "Where are you going?" })
@@ -27,4 +27,16 @@ test("should show hotel search results", async ({ page }) => {
 
   await expect(page.getByText("Hotels found in Test City")).toBeVisible();
   await expect(page.getByRole("link", { name: "Test Hotel" })).toBeVisible();
+});
+
+test("should show hotel detail", async ({ page }) => {
+  await page.goto(UI_URL);
+  await page
+    .getByRole("textbox", { name: "Where are you going?" })
+    .fill("Test City");
+  await page.getByRole("button", { name: "Search" }).click();
+  await page.getByRole("link", { name: "Test Hotel" }).click();
+
+  await expect(page).toHaveURL(/detail/);
+  await expect(page.getByRole("button", { name: "Book now" })).toBeVisible();
 });
