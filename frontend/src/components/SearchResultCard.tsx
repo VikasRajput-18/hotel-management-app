@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { HotelType } from "../../../backend/src/shared/types";
 import { AiFillStar } from "react-icons/ai";
-
+import ImageSwiper from "./ImageSwiper";
 export const HotelRating = ({ starRating }: { starRating: number }) => {
   let maxSize = 5;
 
@@ -26,11 +26,8 @@ type Props = {
 const SearchResultCard = ({ hotel }: Props) => {
   return (
     <div className="grid grid-cols-1 xl:grid-cols-[2fr_3fr] border border-slate-300 rounded-lg p-8 gap-8">
-      <div className="w-full h-full">
-        <img
-          src={hotel.imageUrls[0]}
-          className="w-full h-full object-cover object-center"
-        />
+      <div className="w-[300px] h-[300px]">
+        <ImageSwiper imageUrls={hotel?.imageUrls} />
       </div>
       <div className="grid grid-rows-[1fr_2fr_1fr]">
         <div>

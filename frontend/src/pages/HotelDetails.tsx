@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import * as apiClient from "../api-client";
 import { HotelRating } from "../components/SearchResultCard";
 import GuestInfo from "../components/GuestInfo";
+import ImageSwiper from "../components/ImageSwiper";
 
 const HotelDetails = () => {
   const { hotelId } = useParams();
@@ -27,8 +28,8 @@ const HotelDetails = () => {
         <h1 className="text-3xl font-bold">{hotelData.name}</h1>
       </div>
 
-      <div className="flex flex-wrap gap-4">
-        {hotelData.imageUrls.map((image) => (
+      <div className="flex h-[600px] flex-wrap gap-4">
+        {/* {hotelData.imageUrls.map((image) => (
           <div className="max-h-[400px] flex-[300px]" key={image}>
             <img
               src={image}
@@ -36,7 +37,8 @@ const HotelDetails = () => {
               className="rounded-md w-full object-cover h-full object-center"
             />
           </div>
-        ))}
+        ))} */}
+        <ImageSwiper imageUrls={hotelData?.imageUrls} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-2">

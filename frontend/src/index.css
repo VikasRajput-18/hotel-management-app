@@ -10,3 +10,39 @@
     background: linear-gradient(90deg, #3fb418 0%, #5de82e 100%);
   }
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: white;
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  right: 10px;
+  padding: 30px;
+  color: #000 !important;
+  fill: black !important;
+  stroke: black !important;
+  scale: 0.5;
+  border-radius: 50%;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  scale: 0.5;
+  font-weight: bolder;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+.swiper-button-prev {
+  left: 0;
+}
+
+.yarl__container {
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  backdrop-filter: blur(0.4rem);
+}
+
+.yarl__navigation_next,
+.yarl__navigation_prev {
+  display: none !important;
+}
