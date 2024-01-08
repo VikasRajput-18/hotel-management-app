@@ -4,6 +4,7 @@ import {
   getHotelDetails,
   createPayment,
   hotelBookings,
+  getHotels
 } from "../controller/hotels.controller";
 import { param } from "express-validator";
 const router = express.Router();
@@ -24,6 +25,7 @@ router
     [param("id").notEmpty().withMessage("Hotel ID is requried")],
     searchHotels
   );
+router.route("/").get(getHotels);
 router.route("/:id").get(getHotelDetails);
 
 export default router;

@@ -153,3 +153,13 @@ export const hotelBookings = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+export const getHotels = async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find().sort("-lastUpdated");
+    res.json(hotels);
+  } catch (error) {
+    console.log(`Hotels :  ${error}`);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
