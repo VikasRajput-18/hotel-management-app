@@ -1,5 +1,44 @@
 import mongoose, { Schema } from "mongoose";
-import { HotelType } from "../shared/types";
+import { BookingType, HotelType } from "../shared/types";
+
+const bookingSchema = new mongoose.Schema<BookingType>({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  adultCount: {
+    type: Number,
+    required: true,
+  },
+  childCount: {
+    type: Number,
+    required: true,
+  },
+  totalCost: {
+    type: Number,
+    required: true,
+  },
+  userId: {
+    type: String,
+    required: true,
+  },
+  checkIn: {
+    type: Date,
+    required: true,
+  },
+  checkOut: {
+    type: Date,
+    required: true,
+  },
+});
 
 const hotelSchema = new mongoose.Schema<HotelType>({
   userId: {
@@ -63,6 +102,7 @@ const hotelSchema = new mongoose.Schema<HotelType>({
     required: true,
     default: Date.now,
   },
+  bookings: [bookingSchema],
 });
 
 const Hotel = mongoose.model<HotelType>("Hotel", hotelSchema);

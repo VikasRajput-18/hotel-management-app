@@ -1,8 +1,12 @@
 import express from "express";
-import { registerUser } from "../controller/users.controller";
+import { registerUser , getMyDetails } from "../controller/users.controller";
 import { check } from "express-validator";
+import { verifyToken } from "../middleware/auth.middleware";
 
 const router = express.Router();
+
+
+router.route("/me").get(verifyToken , getMyDetails)
 
 router.route("/register").post(
   [
