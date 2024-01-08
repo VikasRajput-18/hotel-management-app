@@ -4,7 +4,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
@@ -14,6 +13,8 @@ import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
 import HotelDetails from "./pages/HotelDetails";
 import Booking from "./pages/Booking";
+import MyBookings from "./pages/MyBookings";
+import Layout from "./layouts/Layout";
 
 const App = () => {
   const { isLoggedIn } = useAppContext();
@@ -68,6 +69,14 @@ const App = () => {
               element={
                 <Layout>
                   <AddHotel />
+                </Layout>
+              }
+            />
+            <Route
+              path="/my-bookings"
+              element={
+                <Layout>
+                  <MyBookings />
                 </Layout>
               }
             />

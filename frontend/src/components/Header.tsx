@@ -24,7 +24,7 @@ const Header = () => {
             <>
               <Link
                 className=" rounded-sm text-white flex items-center justify-center px-3 font-bold hover:bg-blue-500  transition-all duration-200 ease-in-out"
-                to="/my-booking"
+                to="/my-bookings"
               >
                 My Bookings
               </Link>
